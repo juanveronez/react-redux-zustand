@@ -39,15 +39,13 @@ export const playerSlice = createSlice({
       state.currentLessonIndex = lessonIndex
     },
     next: (state) => {
-      const { currentLessonIndex, currentModuleIndex } = state
-
-      const nextLessonIndex = currentLessonIndex + 1
-      const nextLesson = state.course.modules[currentModuleIndex].lessons[nextLessonIndex]
+      const nextLessonIndex = state.currentLessonIndex + 1
+      const nextLesson = state.course.modules[state.currentModuleIndex].lessons[nextLessonIndex]
 
       if (nextLesson) {
         state.currentLessonIndex = nextLessonIndex
       } else {
-        const nextModuleIndex = currentModuleIndex + 1
+        const nextModuleIndex = state.currentModuleIndex + 1
         const nextModule = state.course.modules[nextModuleIndex]
 
         if (nextModule) {
