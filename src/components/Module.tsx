@@ -4,6 +4,8 @@ import { ChevronDown } from "lucide-react";
 import { Lesson } from "./Lesson";
 import type { FC } from "react";
 import { useAppSelector } from '../store';
+import { play } from '../store/slices/player';
+import { useDispatch } from 'react-redux';
 
 interface ModuleProps {
   moduleIndex: number
@@ -13,6 +15,7 @@ interface ModuleProps {
 
 export const Module: FC<ModuleProps> = ({ moduleIndex, title, lessonsAmount }) => {
   const lessons = useAppSelector((state) => state.player.course.modules[moduleIndex].lessons)
+  const dispatch = useDispatch()
 
   return (
     <Collapsible.Root className='group'>
@@ -31,11 +34,12 @@ export const Module: FC<ModuleProps> = ({ moduleIndex, title, lessonsAmount }) =
         <ChevronDown className="w-5 h-5 ml-auto text-zinc-400 group-data-[state=open]:rotate-180 transition-transform" />
       </Collapsible.Trigger>
       <Collapsible.Content className="relative flex flex-col gap-4 p-6">
-        {lessons.map(({ id, title, duration }) => (
+        {lessons.map(({ id, title, duration }, lessonIndex) => (
           <Lesson
             key={id}
             title={title}
             duration={duration}
+            onPlay={() => dispatch(play([moduleIndex, lessonIndex]))}
           />
         ))}
       </Collapsible.Content>
