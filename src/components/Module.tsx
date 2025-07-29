@@ -22,7 +22,7 @@ export const Module: FC<ModuleProps> = ({ moduleIndex, title, lessonsAmount }) =
   const dispatch = useDispatch()
 
   return (
-    <Collapsible.Root className='group'>
+    <Collapsible.Root className='group' defaultOpen={moduleIndex === 0}>
       <Collapsible.Trigger
         className="flex w-full items-center gap-3 bg-zinc-800 p-4 cursor-pointer"
       >
