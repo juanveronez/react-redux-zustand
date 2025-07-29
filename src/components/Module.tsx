@@ -15,6 +15,10 @@ interface ModuleProps {
 
 export const Module: FC<ModuleProps> = ({ moduleIndex, title, lessonsAmount }) => {
   const lessons = useAppSelector((state) => state.player.course.modules[moduleIndex].lessons)
+  const { currentLessonIndex, currentModuleIndex } = useAppSelector((state) => {
+    const { currentLessonIndex, currentModuleIndex } = state.player
+    return { currentLessonIndex, currentModuleIndex }
+  })
   const dispatch = useDispatch()
 
   return (
@@ -39,6 +43,7 @@ export const Module: FC<ModuleProps> = ({ moduleIndex, title, lessonsAmount }) =
             key={id}
             title={title}
             duration={duration}
+            isCurrent={currentModuleIndex === moduleIndex && currentLessonIndex === lessonIndex}
             onPlay={() => dispatch(play([moduleIndex, lessonIndex]))}
           />
         ))}
