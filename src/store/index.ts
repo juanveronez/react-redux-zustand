@@ -3,7 +3,11 @@ import { configureStore, createSlice } from "@reduxjs/toolkit";
 const todoSlice = createSlice({
   name: 'todo',
   initialState: ['Fazer café', 'Estudar Redux'],
-  reducers: {}
+  reducers: {
+    add: (state, { payload }) => {
+      state.push(payload.newTodo)
+    },
+  }
 })
 
 export const store = configureStore({
@@ -12,3 +16,4 @@ export const store = configureStore({
   }
 })
 
+export const { add } = todoSlice.actions
