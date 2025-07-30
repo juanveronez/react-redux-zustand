@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest run --watch"
+    "test:watch": "vitest run --watch",
+    "server": "json-server server.json -d 500 -w"
   },
   "dependencies": {
     "@radix-ui/react-collapsible": "^1.1.11",
